@@ -12,21 +12,21 @@ export default function Contact() {
                     Interested in collaborating or have a project in mind? Let's connect and build something amazing together.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-9 mb-12">
                     <a href="mailto:Adarsh.Raj.2004@outlook.com" className="gradient-border rounded-xl p-6 hover:scale-105 transition-transform group">
-                        <Mail className="w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:animate-pulse" />
+                        <Mail className="w-12 h-12 text-blue-400 mx-auto mb-3 group-hover:animate-pulse" />
                         <div className="font-space text-sm text-gray-400 mb-1">Email</div>
                         <div className="font-jetbrains text-xs text-gray-300 break-all">Adarsh.Raj.2004@outlook.com</div>
                     </a>
 
                     <a href="https://linkedin.com/in/adarsh-raj04" target="_blank" rel="noopener noreferrer" className="gradient-border rounded-xl p-6 hover:scale-105 transition-transform group">
-                        <Linkedin className="w-8 h-8 text-pink-400 mx-auto mb-3 group-hover:animate-pulse" />
+                        <Linkedin className="w-12 h-12 text-pink-400 mx-auto mb-3 group-hover:animate-pulse" />
                         <div className="font-space text-sm text-gray-400 mb-1">LinkedIn</div>
                         <div className="font-jetbrains text-xs text-gray-300">@adarsh-raj04</div>
                     </a>
 
                     <a href="https://github.com/adarsh-raj04" target="_blank" rel="noopener noreferrer" className="gradient-border rounded-xl p-6 hover:scale-105 transition-transform group">
-                        <Github className="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:animate-pulse" />
+                        <Github className="w-12 h-12 text-green-400 mx-auto mb-3 group-hover:animate-pulse" />
                         <div className="font-space text-sm text-gray-400 mb-1">GitHub</div>
                         <div className="font-jetbrains text-xs text-gray-300">@adarsh-raj04</div>
                     </a>
