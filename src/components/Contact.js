@@ -19,12 +19,6 @@ export default function Contact() {
                         <div className="font-jetbrains text-xs text-gray-300 break-all">Adarsh.Raj.2004@outlook.com</div>
                     </a>
 
-                    <a href="tel:+918877461848" className="gradient-border rounded-xl p-6 hover:scale-105 transition-transform group">
-                        <Phone className="w-8 h-8 text-purple-400 mx-auto mb-3 group-hover:animate-pulse" />
-                        <div className="font-space text-sm text-gray-400 mb-1">Phone</div>
-                        <div className="font-jetbrains text-xs text-gray-300">+91-8877461848</div>
-                    </a>
-
                     <a href="https://linkedin.com/in/adarsh-raj04" target="_blank" rel="noopener noreferrer" className="gradient-border rounded-xl p-6 hover:scale-105 transition-transform group">
                         <Linkedin className="w-8 h-8 text-pink-400 mx-auto mb-3 group-hover:animate-pulse" />
                         <div className="font-space text-sm text-gray-400 mb-1">LinkedIn</div>
