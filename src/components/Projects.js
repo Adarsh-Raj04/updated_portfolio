@@ -1,4 +1,4 @@
-import { Terminal, Code, Rocket, ExternalLink } from 'lucide-react';
+import { Terminal, Code, Rocket } from 'lucide-react';
 
 export default function Projects() {
     const projects = [
