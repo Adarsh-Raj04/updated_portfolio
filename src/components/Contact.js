@@ -129,54 +129,67 @@ export default function Contact() {
                                 </button>
                             </div>
                         ) : (
-                            <form
-                                onSubmit={handleSubmit}
-                                className="flex flex-col gap-5"
-                            >
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+
                                 {/* Name */}
                                 <div>
-                                    <label className="font-space text-xs text-gray-400 mb-2 block tracking-wider">
+                                    <label
+                                        htmlFor="contact-name"
+                                        className="font-space text-xs text-gray-400 mb-2 block tracking-wider"
+                                    >
                                         NAME
                                     </label>
                                     <input
+                                        id="contact-name"
                                         type="text"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
                                         required
                                         placeholder="Your name"
+                                        autoComplete="name"
                                         className="w-full bg-gray-900/50 border border-gray-700 hover:border-blue-500/50 focus:border-blue-500 focus:outline-none rounded-lg px-4 py-3 font-jetbrains text-sm text-gray-300 placeholder-gray-600 transition-colors"
                                     />
                                 </div>
 
                                 {/* Email */}
                                 <div>
-                                    <label className="font-space text-xs text-gray-400 mb-2 block tracking-wider">
+                                    <label
+                                        htmlFor="contact-email"
+                                        className="font-space text-xs text-gray-400 mb-2 block tracking-wider"
+                                    >
                                         EMAIL
                                     </label>
                                     <input
+                                        id="contact-email"
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
                                         placeholder="your@email.com"
+                                        autoComplete="email"
                                         className="w-full bg-gray-900/50 border border-gray-700 hover:border-blue-500/50 focus:border-blue-500 focus:outline-none rounded-lg px-4 py-3 font-jetbrains text-sm text-gray-300 placeholder-gray-600 transition-colors"
                                     />
                                 </div>
 
                                 {/* Message */}
                                 <div>
-                                    <label className="font-space text-xs text-gray-400 mb-2 block tracking-wider">
+                                    <label
+                                        htmlFor="contact-message"
+                                        className="font-space text-xs text-gray-400 mb-2 block tracking-wider"
+                                    >
                                         MESSAGE
                                     </label>
                                     <textarea
+                                        id="contact-message"
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
                                         rows={5}
                                         placeholder="What's on your mind?"
+                                        autoComplete="off"
                                         className="w-full bg-gray-900/50 border border-gray-700 hover:border-blue-500/50 focus:border-blue-500 focus:outline-none rounded-lg px-4 py-3 font-jetbrains text-sm text-gray-300 placeholder-gray-600 transition-colors resize-none"
                                     />
                                 </div>
