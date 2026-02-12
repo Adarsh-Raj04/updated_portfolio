@@ -103,7 +103,7 @@ export default function Navbar() {
 
                             {/* Resume Download CTA */}
                             <a
-                                target='_blank'
+                                target="_blank"
                                 href="/Adarsh_Raj_Resume.pdf"
                                 download
                                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-blue-500/50 hover:border-blue-400 hover:bg-blue-500/10 text-blue-400 hover:text-blue-300 transition-all font-space text-xs whitespace-nowrap"
@@ -118,6 +118,7 @@ export default function Navbar() {
                     {isMobile && (
                         <div className="flex items-center gap-3">
                             <a
+                                target="_blank"
                                 href="/Adarsh_Raj_Resume.pdf"
                                 download
                                 className="text-blue-400 hover:text-blue-300 transition-colors"
