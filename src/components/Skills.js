@@ -45,7 +45,7 @@ export default function Skills() {
                 "GraphQL",
                 "RESTful APIs",
                 "Java",
-                "SQL (Advanced)",
+                "SQL",
             ]
         },
         {
