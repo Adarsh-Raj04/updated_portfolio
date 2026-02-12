@@ -10,7 +10,6 @@ export default function Skills() {
                 "OpenAI (Embeddings, Chat)",
                 "Azure AI Search",
                 "Semantic Search",
-                "NLP",
                 "Databricks Genie (NLQ)",
                 "Power BI NLP",
                 "Machine Learning Pipelines",
@@ -25,7 +24,6 @@ export default function Skills() {
             icon: Database,
             color: "text-blue-400",
             items: [
-                "Apache Spark",
                 "PySpark",
                 "Azure Databricks",
                 "Azure Data Factory (ADF)",
@@ -34,10 +32,7 @@ export default function Skills() {
                 "Data Warehousing",
                 "Data Modeling",
                 "Data Quality Management",
-                "Workflow Automation",
                 "Apache Hive",
-                "Hadoop",
-                "Azure Synapse Analytics",
             ]
         },
         {
@@ -51,10 +46,6 @@ export default function Skills() {
                 "RESTful APIs",
                 "Java",
                 "SQL (Advanced)",
-                "JavaScript",
-                "PHP",
-                "HTML5",
-                "CSS3",
             ]
         },
         {
@@ -81,10 +72,8 @@ export default function Skills() {
                 "Collibra",
                 "ServiceNow",
                 "SailPoint",
-                "Collibra DQ",
                 "Metadata Management",
-                "Data Governance",
-                "Access Governance",
+                "Data and Access Governance",
             ]
         },
         {
@@ -96,7 +85,6 @@ export default function Skills() {
                 "MySQL",
                 "SQL Server",
                 "PostgreSQL",
-                "NoSQL",
             ]
         },
         {
@@ -120,6 +108,7 @@ export default function Skills() {
                 "GitHub",
                 "Visual Studio Code",
                 "Docker",
+                "Claude"
             ]
         },
     ];
