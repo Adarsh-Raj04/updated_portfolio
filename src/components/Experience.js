@@ -6,7 +6,7 @@ export default function Experience() {
             title: "Data & AI Engineer",
             company: "GSK (GlaxoSmithKline)",
             location: "Bengaluru, Karnataka, India",
-            period: "September 2024 – Present",
+            period: "August 2024 – Present",
             highlights: [
                 "Designed and implemented semantic search and conversational AI capabilities for the Rover metadata platform using OpenAI embeddings and Azure AI Search, improving metadata discoverability and user engagement across the enterprise.",
                 "Owned development and optimisation of Apache Spark-based ingestion pipelines on Databricks, achieving significant runtime reductions and enabling automated metadata cataloguing at enterprise scale.",
@@ -48,8 +48,8 @@ export default function Experience() {
                         <div key={index} className="relative">
                             {/* Timeline dot — blue for current, purple for previous */}
                             <div className={`absolute -left-8 top-2 w-4 h-4 rounded-full ring-4 ${index === 0
-                                    ? 'bg-blue-500 ring-blue-500/20'
-                                    : 'bg-purple-500 ring-purple-500/20'
+                                ? 'bg-blue-500 ring-blue-500/20'
+                                : 'bg-purple-500 ring-purple-500/20'
                                 }`} />
 
                             <div className="gradient-border rounded-xl p-8 ml-4">
