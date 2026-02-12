@@ -17,7 +17,7 @@ export default function Participation() {
         },
         {
             title: "Namma Yatri Open Mobility Challenge",
-            organizer: "Govt of Karnataka",
+            organizer: "Unstop",
             date: "March 2023",
             achievement: "Participant",
             description: "Participated in an open initiative to build innovative solutions for mobility issues. Proposed solutions across 3 tracks: Future of Mobility, Driver Enablement, and Namma Yatri platform, focusing on improving transportation efficiency, affordability, and sustainability.",
