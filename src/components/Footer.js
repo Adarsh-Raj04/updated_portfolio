@@ -6,13 +6,14 @@ export default function Footer() {
     return (
         <footer className="py-12 border-t border-blue-500/20 bg-gradient-to-b from-transparent to-black/50">
             <div className="max-w-6xl mx-auto px-6">
+
                 {/* Logo and Tagline */}
                 <div className="text-center mb-8">
                     <div className="font-orbitron text-2xl font-bold mb-2 glow-text">
                         <span className="text-blue-400">A</span>DARSH<span className="text-purple-400">.</span>
                     </div>
                     <p className="font-jetbrains text-gray-500 text-sm">
-                        Building the future, one pipeline at a time
+                        Turning data into intelligence, one integration at a time
                     </p>
                 </div>
 

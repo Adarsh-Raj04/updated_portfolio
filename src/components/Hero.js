@@ -25,10 +25,18 @@ export default function Hero() {
                 </div>
 
                 <p className="font-jetbrains text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-                    Architecting enterprise-scale data and AI solutions at <a href='https://www.gsk.com/' target='_blank' rel='noopener noreferrer'><span className="text-blue-400 font-semibold">GSK</span></a>.
-                    Leveraging Azure Data & AI, PySpark, Machine Learning, OpenAI, ServiceNow, and SailPoint to build intelligent, automated, and high-impact systems.
+                    Architecting enterprise-scale data and AI solutions at{' '}
+                    <a href='https://www.gsk.com/' target='_blank' rel='noopener noreferrer'>
+                        <span className="text-blue-400 font-semibold">GSK</span>
+                    </a>
+                    . Building semantic search with <span className="text-blue-400">OpenAI</span> &amp;{' '}
+                    <span className="text-blue-400">Azure AI Search</span>, scalable pipelines with{' '}
+                    <span className="text-blue-400">Apache Spark</span> &amp;{' '}
+                    <span className="text-blue-400">Databricks</span>, and high-impact integrations across{' '}
+                    <span className="text-blue-400">ServiceNow</span>,{' '}
+                    <span className="text-blue-400">Collibra</span>, and{' '}
+                    <span className="text-blue-400">SailPoint</span>.
                 </p>
-
 
                 <div className="flex flex-wrap justify-center gap-6 mb-16">
                     <a href="#contact" className="gradient-border px-8 py-4 rounded-lg font-space text-sm hover:scale-105 transition-transform">
