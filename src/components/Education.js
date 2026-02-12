@@ -6,7 +6,6 @@ export default function Education() {
         "Database Management Systems",
         "Artificial Intelligence",
         "Machine Learning",
-        "Cloud Computing",
         "Computer Networks",
         "Operating Systems",
         "Design Patterns",

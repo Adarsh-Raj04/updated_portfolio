@@ -1,7 +1,23 @@
-import { Award, Zap, GitMerge, Search, Trophy, Users } from 'lucide-react';
+import { Award, Zap, GitMerge, Search, Trophy, Users, Star, Heart } from 'lucide-react';
 
 export default function Achievements() {
     const achievements = [
+        {
+            icon: <Star className="w-8 h-8" />,
+            title: "GSK Recognition Awards",
+            metric: "3+ Awards Received",
+            description: "Received multiple formal recognition awards from GSK for exceptional technical contributions, innovative solutions, and significant impact on enterprise data and AI initiatives.",
+            color: "from-indigo-500 to-purple-500",
+            metricColor: "text-indigo-400",
+        },
+        {
+            icon: <Heart className="w-8 h-8" />,
+            title: "GSK E-card Recognition",
+            metric: "2 E-cards Received",
+            description: "Awarded GSK E-cards for outstanding work performance, dedication to quality, and consistently exceeding expectations in project delivery and team collaboration.",
+            color: "from-rose-500 to-pink-500",
+            metricColor: "text-rose-400",
+        },
         {
             icon: <GitMerge className="w-8 h-8" />,
             title: "90% Manual Effort Eliminated",
@@ -50,6 +66,7 @@ export default function Achievements() {
             color: "from-pink-500 to-rose-500",
             metricColor: "text-rose-400",
         },
+
     ];
 
     return (

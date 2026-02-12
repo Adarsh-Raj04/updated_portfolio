@@ -29,7 +29,7 @@ export default function Navbar() {
 
             const sections = [
                 'hero', 'about', 'experience', 'skills',
-                'projects', 'achievements', 'education', 'certifications', 'contact'
+                'projects', 'achievements', 'participation', 'education', 'certifications', 'contact'
             ];
             const current = sections.find(section => {
                 const element = document.getElementById(section);
@@ -66,6 +66,7 @@ export default function Navbar() {
         { name: 'Skills', href: '#skills' },
         { name: 'Projects', href: '#projects' },
         { name: 'Achievements', href: '#achievements' },
+        { name: 'Participation', href: '#participation' },
         { name: 'Education', href: '#education' },
         { name: 'Certifications', href: '#certifications' },
         { name: 'Contact', href: '#contact' },
