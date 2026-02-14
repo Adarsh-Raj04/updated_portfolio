@@ -22,78 +22,73 @@ import SoundEffects from './components/SoundEffects';
 import Terminal from './components/Terminal';
 import CursorSelector from './components/CursorSelector';
 import PortfolioCounter from './components/PortfolioCounter';
+import LandingAnimation from './components/LandingAnimation';
+import CursorGlow from './components/CursorGlow';
+import './components/LandingAnimation.css';
 import './animations.css';
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const [showContent, setShowContent] = useState(false);
 
   return (
-    <main className="min-h-screen"
-      style={{
-        color: 'var(--text-primary)',
-        position: 'relative'
-      }}
-    >
-      {/* Scroll Progress Bar */}
-      <ScrollProgress />
+    <>
+      {/* Landing Animation */}
+      <LandingAnimation onComplete={() => setShowContent(true)} />
 
-      {/* Animated Gradient Background */}
-      <AnimatedBackground />
-
-      {/* Particle Network Effect - Medium parallax */}
-      <ParallaxLayer speed={0.3}>
-        <ParticleBackground />
-      </ParallaxLayer>
-
-      {/* Cursor Glow Effect */}
-      <div
-        className="cursor-glow"
+      <main className="min-h-screen"
         style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`
+          color: 'var(--text-primary)',
+          position: 'relative',
+          opacity: showContent ? 1 : 0,
+          transition: 'opacity 0.5s ease-in'
         }}
-      />
+      >
+        {/* Scroll Progress Bar */}
+        <ScrollProgress />
 
-      {/* Easter Eggs */}
-      <EasterEggs />
+        {/* Animated Gradient Background */}
+        <AnimatedBackground />
 
-      <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Achievements />
-      <Participation />
-      <Education />
-      <Certifications />
-      <GitHubStats />
-      <Contact />
-      <Footer />
+        {/* Particle Network Effect - Medium parallax */}
+        <ParallaxLayer speed={0.3}>
+          <ParticleBackground />
+        </ParallaxLayer>
 
-      {/* Back to Top Button */}
-      <BackToTop />
+        {/* Enhanced Cursor Glow with Trails */}
+        <CursorGlow />
 
-      {/* Sound Effects Toggle */}
-      <SoundEffects />
+        {/* Easter Eggs */}
+        <EasterEggs />
 
-      {/* Cursor Selector */}
-      <CursorSelector />
+        <Navbar />
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Achievements />
+        <Participation />
+        <Education />
+        <Certifications />
+        <GitHubStats />
+        <Contact />
+        <Footer />
 
-      {/* Terminal */}
-      <Terminal />
+        {/* Back to Top Button */}
+        <BackToTop />
 
-      {/* Portfolio Counter */}
-      <PortfolioCounter />
-    </main>
+        {/* Sound Effects Toggle */}
+        <SoundEffects />
+
+        {/* Cursor Selector */}
+        <CursorSelector />
+
+        {/* Terminal */}
+        <Terminal />
+
+        {/* Portfolio Counter */}
+        <PortfolioCounter />
+      </main>
+    </>
   );
 }

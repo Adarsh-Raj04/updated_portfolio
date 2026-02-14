@@ -1,0 +1,305 @@
+/* Landing Animation Container */
+.landing-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+    overflow: hidden;
+}
+
+.landing-animation.reveal {
+    animation: fadeOut 1s ease-out forwards;
+}
+
+.landing-animation.complete {
+    animation: fadeOut 1s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* Animated Grid Background */
+.landing-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridPulse 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes gridPulse {
+    0% {
+        background-position: 0 0;
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        background-position: 50px 50px;
+        opacity: 0.3;
+    }
+}
+
+/* Center Content */
+.landing-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Logo/Name with Glitch Effect */
+.landing-logo {
+    margin-bottom: 40px;
+}
+
+.glitch-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ff00ff;
+    text-shadow: 
+        0 0 10px rgba(255, 0, 255, 0.8),
+        0 0 20px rgba(255, 0, 255, 0.6),
+        0 0 30px rgba(255, 0, 255, 0.4);
+    position: relative;
+    animation: glitchAnimation 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    color: #00ffff;
+    animation: glitchBefore 0.3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch-text::after {
+    color: #ffff00;
+    animation: glitchAfter 0.3s infinite;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchAnimation {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+@keyframes glitchBefore {
+    0%, 100% {
+        transform: translate(0);
+    }
+    33% {
+        transform: translate(-4px, 0);
+    }
+    66% {
+        transform: translate(4px, 0);
+    }
+}
+
+@keyframes glitchAfter {
+    0%, 100% {
+        transform: translate(0);
+    }
+    33% {
+        transform: translate(4px, 0);
+    }
+    66% {
+        transform: translate(-4px, 0);
+    }
+}
+
+/* Loading Bar */
+.loading-bar-container {
+    width: 300px;
+    height: 4px;
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 2px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.loading-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+    border-radius: 2px;
+    animation: loadingProgress 2s ease-out forwards;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+@keyframes loadingProgress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Loading Bar - Updated timing */
+.loading-bar {
+    animation-duration: 2.5s;
+}
+
+/* Loading Text */
+.loading-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: #00ffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.loading-text span {
+    animation: dotBlink 1.4s infinite;
+}
+
+.dot-1 {
+    animation-delay: 0s;
+}
+
+.dot-2 {
+    animation-delay: 0.2s;
+}
+
+.dot-3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotBlink {
+    0%, 20%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Reveal Text */
+.reveal-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: #00ffff;
+    text-shadow: 
+        0 0 20px rgba(0, 255, 255, 1),
+        0 0 40px rgba(0, 255, 255, 0.8),
+        0 0 60px rgba(0, 255, 255, 0.6);
+    animation: revealScale 1s ease-out;
+}
+
+@keyframes revealScale {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Floating Particles */
+.landing-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.landing-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00ffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffff;
+    animation: particleFloat 5s infinite;
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .glitch-text {
+        font-size: 2.5rem;
+    }
+
+    .reveal-text {
+        font-size: 3rem;
+    }
+
+    .loading-bar-container {
+        width: 250px;
+    }
+
+    .loading-text {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .glitch-text {
+        font-size: 2rem;
+    }
+
+    .reveal-text {
+        font-size: 2.5rem;
+    }
+
+    .loading-bar-container {
+        width: 200px;
+    }
+}

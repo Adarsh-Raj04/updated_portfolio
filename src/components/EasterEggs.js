@@ -9,6 +9,8 @@ export default function EasterEggs() {
         let konamiIndex = 0;
 
         let typedKeys = '';
+        let lastKeyTime = 0;
+        const TYPING_THRESHOLD = 1000; // If keys pressed within 500ms, consider it typing
 
         const showPopup = (text) => {
             const notification = document.createElement('div');
@@ -37,6 +39,53 @@ export default function EasterEggs() {
 
         const activateHackerMode = () => {
     document.body.classList.add('hacker-mode');
+
+    // Show exit instruction
+    const exitHint = document.createElement('div');
+    exitHint.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,255,0,0.9);
+            border: 2px solid #00ff00;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            z-index: 10001;
+            box-shadow: 0 0 20px #00ff00;
+            animation: pulse 2s infinite;
+        ">
+            ⚠️ Press ESC to exit Hacker Mode
+        </div>
+    `;
+    document.body.appendChild(exitHint);
+
+    // Auto-disable after 30 seconds
+    const autoDisableTimer = setTimeout(() => {
+        document.body.classList.remove('hacker-mode');
+        exitHint.remove();
+        showPopup('⏰ Hacker Mode Auto-Disabled');
+    }, 30000);
+
+    // ESC key to exit manually
+    const exitHandler = (e) => {
+        if (e.key === 'Escape') {
+            document.body.classList.remove('hacker-mode');
+            if (exitHint && exitHint.parentNode) {
+                exitHint.remove();
+            }
+            clearTimeout(autoDisableTimer);
+            window.removeEventListener('keydown', exitHandler);
+            showPopup('👋 Exited Hacker Mode');
+        }
+    };
+    
+    // Add listener with higher priority
+    window.addEventListener('keydown', exitHandler, true);
 
     // 1️⃣ GLITCH FLASH
     const flash = document.createElement('div');
@@ -110,154 +159,105 @@ export default function EasterEggs() {
 
 
         const handleKeyDown = (e) => {
-    // Ignore if user is typing in an input field, textarea, or contenteditable
-    const target = e.target;
-    const isTyping = target.tagName === 'INPUT' || 
-                     target.tagName === 'TEXTAREA' || 
-                     target.isContentEditable ||
-                     target.closest('input') ||
-                     target.closest('textarea');
-    
-    if (isTyping) {
-        return; // Don't trigger easter eggs while typing
-    }
+            // Ignore if user is typing in an input field, textarea, or contenteditable
+            const target = e.target;
+            const isTyping = target.tagName === 'INPUT' || 
+                             target.tagName === 'TEXTAREA' || 
+                             target.isContentEditable ||
+                             target.closest('input') ||
+                             target.closest('textarea');
 
-    const key = e.key.toLowerCase();
+            if (isTyping) {
+                return; // Don't trigger easter eggs while typing
+            }
 
-    // -----------------------------
-    // 1️⃣ KONAMI DETECTION (PRIORITY)
-    // -----------------------------
-    if (key === konamiCode[konamiIndex]) {
-        konamiIndex++;
+            const key = e.key.toLowerCase();
+            const currentTime = Date.now();
+            const timeSinceLastKey = currentTime - lastKeyTime;
+            lastKeyTime = currentTime;
 
-        if (konamiIndex === konamiCode.length) {
-            activateHackerMode();
-            konamiIndex = 0;
+            // Check if user is typing quickly (part of a word like "adarsh")
+            const isRapidTyping = timeSinceLastKey < TYPING_THRESHOLD;
+
+            // -----------------------------
+            // 1️⃣ SECRET WORD TRACKING (ALWAYS track)
+            // -----------------------------
+            typedKeys += key;
+            typedKeys = typedKeys.slice(-10);
+
+            if (typedKeys.includes('adarsh')) {
+                showPopup('👋 Hey! You found the creator');
+                typedKeys = '';
+                return; // Exit early to prevent single key commands
+            }
+
+            // -----------------------------
+            // 2️⃣ KONAMI DETECTION
+            // -----------------------------
+            if (key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+
+                if (konamiIndex === konamiCode.length) {
+                    activateHackerMode();
+                    konamiIndex = 0;
+                    return;
+                }
+            } else if (key === konamiCode[0]) {
+                // restart if first key matches
+                konamiIndex = 1;
+            } else {
+                konamiIndex = 0;
+            }
+
+            // -----------------------------
+            // 3️⃣ SINGLE KEY TRIGGERS (SKIP if rapid typing)
+            // -----------------------------
+            if (isRapidTyping) {
+                return; // Don't trigger single key commands during rapid typing
+            }
+
+
+            // T - Open Terminal
+            if (key === 't') {
+                // Trigger terminal open by simulating click on terminal button
+                const terminalBtn = document.querySelector('[aria-label="Open terminal"]');
+                if (terminalBtn) {
+                    terminalBtn.click();
+                    showPopup('💻 Terminal Activated!');
+                }
+                return;
+            }
+
+            // C - Toggle Cursor Effects
+            if (key === 'c') {
+                const cursorGlow = document.querySelector('.cursor-glow');
+                if (cursorGlow) {
+                    cursorGlow.style.display = cursorGlow.style.display === 'none' ? 'block' : 'none';
+                    showPopup('✨ Cursor Effects Toggled');
+                }
+                return;
+            }
+
+            // P - Toggle Particles
+            if (key === 'p') {
+                document.body.classList.toggle('hide-particles');
+                const isHidden = document.body.classList.contains('hide-particles');
+                showPopup(isHidden ? '🌟 Particles Disabled' : '🌟 Particles Enabled');
+                return;
+            }
+
+            if (key === 'g') {
+                document.body.classList.toggle('dev-mode');
+                showPopup('🚀 Dev Mode Toggled');
+                return;
+            }
+
+            if (key === 'l') {
+                document.body.classList.toggle('love-mode');
+                showPopup('❤️ Love Mode Toggled');
+                return;
+            }
         }
-    } else if (key === konamiCode[0]) {
-        // restart if first key matches
-        konamiIndex = 1;
-    } else {
-        konamiIndex = 0;
-    }
-
-    // -----------------------------
-    // 2️⃣ SINGLE KEY TRIGGERS
-    // -----------------------------
-    
-    // R - Download Resume
-    if (key === 'r') {
-        const link = document.createElement('a');
-        link.href = '/Adarsh_Raj_Resume.pdf';
-        link.download = 'Adarsh_Raj_Resume.pdf';
-        link.click();
-        showPopup('� Resume Downloaded!');
-        return;
-    }
-
-    // T - Open Terminal
-    if (key === 't') {
-        // Trigger terminal open by simulating click on terminal button
-        const terminalBtn = document.querySelector('[aria-label="Open terminal"]');
-        if (terminalBtn) {
-            terminalBtn.click();
-            showPopup('💻 Terminal Activated!');
-        }
-        return;
-    }
-
-    // C - Toggle Cursor Effects
-    if (key === 'c') {
-        const cursorGlow = document.querySelector('.cursor-glow');
-        if (cursorGlow) {
-            cursorGlow.style.display = cursorGlow.style.display === 'none' ? 'block' : 'none';
-            showPopup('✨ Cursor Effects Toggled');
-        }
-        return;
-    }
-
-    // P - Toggle Particles
-    if (key === 'p') {
-        document.body.classList.toggle('hide-particles');
-        const isHidden = document.body.classList.contains('hide-particles');
-        console.log('Particles toggled:', isHidden ? 'HIDDEN' : 'VISIBLE');
-        console.log('Body classes:', document.body.className);
-        showPopup(isHidden ? '🌟 Particles Disabled' : '🌟 Particles Enabled');
-        return;
-    }
-
-    // S - Scroll to Top
-    if (key === 's') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        showPopup('⬆️ Scrolled to Top!');
-        return;
-    }
-
-    // H - Show Help
-    if (key === 'h') {
-        const helpText = `
-            <div style="text-align: left; font-size: 14px; line-height: 1.8;">
-                <div style="font-size: 18px; margin-bottom: 10px;">🎮 Secret Keys:</div>
-                <div>R - Download Resume</div>
-                <div>T - Open Terminal</div>
-                <div>C - Toggle Cursor</div>
-                <div>P - Toggle Particles</div>
-                <div>S - Scroll to Top</div>
-                <div>G - Dev Mode</div>
-                <div>L - Love Mode</div>
-                <div>H - Show This Help</div>
-                <div style="margin-top: 10px; color: #fbbf24;">Type "adarsh" for surprise!</div>
-                <div style="color: #fbbf24;">Click logo 7 times for Matrix!</div>
-                <div style="color: #fbbf24;">Konami Code for Hacker Mode!</div>
-            </div>
-        `;
-        const notification = document.createElement('div');
-        notification.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(135deg, rgba(0,255,255,0.95), rgba(255,0,255,0.95));
-                padding: 30px 40px;
-                border-radius: 16px;
-                font-family: 'Orbitron';
-                color: white;
-                z-index: 10000;
-                box-shadow: 0 0 40px rgba(0,255,255,0.7);
-                max-width: 400px;
-            ">
-                ${helpText}
-            </div>
-        `;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 5000);
-        return;
-    }
-
-    if (key === 'g') {
-        document.body.classList.toggle('dev-mode');
-        showPopup('🚀 Dev Mode Toggled');
-        return;
-    }
-
-    if (key === 'l') {
-        document.body.classList.toggle('love-mode');
-        showPopup('❤️ Love Mode Toggled');
-        return;
-    }
-
-    // -----------------------------
-    // 3️⃣ SECRET WORD TRACKING
-    // -----------------------------
-    typedKeys += key;
-    typedKeys = typedKeys.slice(-10);
-
-    if (typedKeys.includes('adarsh')) {
-        showPopup('👋 Hey! You found the creator');
-        typedKeys = '';
-    }
-};
 
 
         const handleLogoClick = (e) => {
