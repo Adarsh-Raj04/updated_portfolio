@@ -21,6 +21,7 @@ import EasterEggs from './components/EasterEggs';
 import SoundEffects from './components/SoundEffects';
 import Terminal from './components/Terminal';
 import CursorSelector from './components/CursorSelector';
+import PortfolioCounter from './components/PortfolioCounter';
 import './animations.css';
 
 export default function Home() {
@@ -90,6 +91,9 @@ export default function Home() {
 
       {/* Terminal */}
       <Terminal />
+
+      {/* Portfolio Counter */}
+      <PortfolioCounter />
     </main>
   );
 }
