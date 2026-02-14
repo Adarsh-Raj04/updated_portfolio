@@ -11,8 +11,19 @@ export default function Terminal() {
     ]);
     const [commandHistory, setCommandHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
+    const [isMobile, setIsMobile] = useState(false);
     const inputRef = useRef(null);
     const historyRef = useRef(null);
+
+    // Detect mobile device
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const commands = {
         help: {
@@ -166,13 +177,18 @@ export default function Terminal() {
         }
     }, [isOpen, isMinimized]);
 
+    // Don't render on mobile
+    if (isMobile) {
+        return null;
+    }
+
     return (
         <>
             {/* Terminal Toggle Button */}
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg backdrop-blur-md border transition-all duration-300 group flex items-center gap-2"
+                    className="fixed bottom-0 left-0 z-50 px-6 py-3 rounded-lg backdrop-blur-md border transition-all duration-300 group flex items-center gap-2"
                     style={{
                         background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15))',
                         borderColor: 'var(--border-primary)',
@@ -190,13 +206,16 @@ export default function Terminal() {
             {/* Terminal Window */}
             {isOpen && (
                 <div
-                    className={`fixed bottom-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    className={`fixed bottom-0 left-0 right-0 md:left-0 md:right-auto md:bottom-0 z-50 transition-all duration-300 ${
                         isMinimized ? 'h-12' : 'h-96'
                     }`}
                     style={{
+                        width: '100%',
+                        maxWidth: '600px',
                         background: 'rgba(10, 14, 26, 0.95)',
                         backdropFilter: 'blur(10px)',
                         borderTop: '1px solid var(--border-primary)',
+                        borderRight: '1px solid var(--border-primary)',
                         boxShadow: '0 -4px 20px rgba(0, 255, 255, 0.2)'
                     }}
                 >

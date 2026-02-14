@@ -24,7 +24,7 @@ export default function BackToTop() {
     return (
         <button
             onClick={scrollToTop}
-            className={`fixed bottom-8 right-8 z-50 p-4 rounded-full backdrop-blur-md border transition-all duration-300 group ${
+            className={`fixed bottom-0 right-0 z-50 p-4 rounded-full backdrop-blur-md border transition-all duration-300 group ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
             }`}
             style={{
@@ -35,7 +35,7 @@ export default function BackToTop() {
             aria-label="Back to top"
         >
             <ArrowUp 
-                className="w-6 h-6 transition-transform group-hover:-translate-y-1 duration-300" 
+                className="w-4 h-4 transition-transform group-hover:-translate-y-1 duration-300" 
                 style={{ color: 'var(--accent-cyan)' }} 
             />
         </button>

@@ -89,7 +89,7 @@ export default function SoundEffects() {
     return (
         <button
             onClick={() => setSoundEnabled(!soundEnabled)}
-            className={`fixed bottom-8 left-8 z-50 p-4 rounded-full backdrop-blur-md border transition-all duration-300 group ${
+            className={`fixed bottom-16 left-2 z-50 p-4 rounded-full backdrop-blur-md border transition-all duration-300 group ${
                 soundEnabled ? 'opacity-100' : 'opacity-100'
             }`}
             style={{

@@ -1,15 +1,80 @@
 import { ChevronDown } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
-export default function About() {
-    const stats = [
-        { value: '2+', label: 'YEARS AT GSK', color: 'text-blue-400' },
-        { value: '200+', label: 'HOURS AUTOMATED', color: 'text-purple-400' },
-        { value: '90%', label: 'MANUAL EFFORT REMOVED', color: 'text-pink-400' },
-        { value: '50K+', label: 'TUTORIAL VIEWS', color: 'text-cyan-400' },
-    ];
+const AnimatedCounter = ({ value, suffix, color, isVisible }) => {
+    const [count, setCount] = useState(0);
+    const hasAnimatedRef = useRef(false);
+
+    useEffect(() => {
+        if (!isVisible || hasAnimatedRef.current) return;
+
+        hasAnimatedRef.current = true;
+        
+        const duration = 2000;
+        const startTime = Date.now();
+        
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const currentValue = Math.floor(progress * value);
+            setCount(currentValue);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                setCount(value);
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    }, [isVisible, value]);
 
     return (
-        <section id="about" className="py-32 relative">
+        <div className={`text-4xl font-orbitron font-bold ${color} mb-2`}>
+            {count}{suffix}
+        </div>
+    );
+};
+
+export default function About() {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+    const hasTriggeredRef = useRef(false);
+
+    const stats = [
+        { value: 2, suffix: '+', label: 'YEARS AT GSK', color: 'text-blue-400' },
+        { value: 200, suffix: '+', label: 'HOURS AUTOMATED', color: 'text-purple-400' },
+        { value: 90, suffix: '%', label: 'MANUAL EFFORT REMOVED', color: 'text-pink-400' },
+        { value: 50, suffix: 'K+', label: 'TUTORIAL VIEWS', color: 'text-cyan-400' },
+    ];
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasTriggeredRef.current) {
+                    hasTriggeredRef.current = true;
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        const currentRef = sectionRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
+        }
+
+        return () => {
+            if (currentRef) {
+                observer.unobserve(currentRef);
+            }
+        };
+    }, []);
+
+    return (
+        <section ref={sectionRef} id="about" className="py-32 relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -54,11 +119,14 @@ export default function About() {
 
                     {/* Stats grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-                        {stats.map(({ value, label, color }) => (
+                        {stats.map(({ value, suffix, label, color }) => (
                             <div key={label} className="text-center">
-                                <div className={`text-4xl font-orbitron font-bold ${color} mb-2`}>
-                                    {value}
-                                </div>
+                                <AnimatedCounter 
+                                    value={value} 
+                                    suffix={suffix} 
+                                    color={color} 
+                                    isVisible={isVisible}
+                                />
                                 <div className="font-space text-gray-400 text-sm tracking-wider">
                                     {label}
                                 </div>
