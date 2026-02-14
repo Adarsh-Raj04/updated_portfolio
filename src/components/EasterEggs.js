@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 export default function EasterEggs() {
+    // eslint-disable-next-line no-unused-vars
     const [konamiActive, setKonamiActive] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [clickCount, setClickCount] = useState(0);
 
     useEffect(() => {

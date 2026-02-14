@@ -34,13 +34,14 @@ export default function GitHubStats() {
             { threshold: 0.2 }
         );
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
+        const currentRef = sectionRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
         }
 
         return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
+            if (currentRef) {
+                observer.unobserve(currentRef);
             }
         };
     }, []);
@@ -104,7 +105,8 @@ export default function GitHubStats() {
                 </h2>
 
                 <p className="text-center mb-16 font-space" style={{ color: 'var(--text-tertiary)' }}>
-                    // My open source contributions and activity
+                    {/* My open source contributions and activity */}
+                    My open source contributions and activity
                 </p>
 
                 {loading ? (
