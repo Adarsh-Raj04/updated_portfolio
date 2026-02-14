@@ -275,7 +275,7 @@ export default function Projects() {
                 </h2>
 
                 <p className="text-center mb-8 font-space" style={{ color: 'var(--text-tertiary)' }}>
-                    // Enterprise solutions and innovative applications
+                    Enterprise solutions and innovative applications
                 </p>
 
                 {/* Filter Buttons */}

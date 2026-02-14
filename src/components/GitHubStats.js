@@ -105,7 +105,6 @@ export default function GitHubStats() {
                 </h2>
 
                 <p className="text-center mb-16 font-space" style={{ color: 'var(--text-tertiary)' }}>
-                    {/* My open source contributions and activity */}
                     My open source contributions and activity
                 </p>
 
