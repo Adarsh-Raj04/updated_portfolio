@@ -1,0 +1,955 @@
+/* ============================================
+   GAMING-INSPIRED ANIMATIONS
+   ============================================ */
+
+/* Glitch Effect */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+        text-shadow: 2px 2px 0 #00ffff, -2px -2px 0 #ff00ff;
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+        text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffff;
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+        text-shadow: 2px 2px 0 #00ffff, -2px -2px 0 #ff00ff;
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+        text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffff;
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+        text-shadow: 2px 2px 0 #00ffff, -2px -2px 0 #ff00ff;
+    }
+
+    100% {
+        transform: translate(0);
+        text-shadow: 2px 2px 0 #00ffff, -2px -2px 0 #ff00ff;
+    }
+}
+
+.glitch {
+    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.glitch-hover:hover {
+    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Neon Pulse */
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 10px var(--glow-primary),
+            0 0 20px var(--glow-primary),
+            0 0 30px var(--glow-primary),
+            0 0 40px #00ffff,
+            0 0 70px #00ffff,
+            0 0 80px #00ffff,
+            0 0 100px #00ffff;
+    }
+
+    50% {
+        text-shadow:
+            0 0 5px var(--glow-primary),
+            0 0 10px var(--glow-primary),
+            0 0 15px var(--glow-primary),
+            0 0 20px #00ffff,
+            0 0 35px #00ffff,
+            0 0 40px #00ffff,
+            0 0 50px #00ffff;
+    }
+}
+
+.neon-pulse {
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+/* Scan Lines */
+@keyframes scanlines {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+.scanlines {
+    position: relative;
+    overflow: hidden;
+}
+
+.scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 255, 255, 0.03) 0px,
+            rgba(0, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px);
+    animation: scanlines 8s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Holographic Gradient */
+@keyframes holographic {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.holographic {
+    background: linear-gradient(45deg,
+            #ff00ff,
+            #00ffff,
+            #ffff00,
+            #ff00ff);
+    background-size: 300% 300%;
+    animation: holographic 3s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 3D Card Flip */
+.card-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d:hover {
+    transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+}
+
+/* Typing Animation */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing {
+    overflow: hidden;
+    border-right: 2px solid #00ffff;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Energy Bar Fill */
+@keyframes energyFill {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.energy-bar {
+    position: relative;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.energy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ffff, #00ff88);
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: energyFill 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    position: relative;
+}
+
+.energy-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Particle Float */
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Slide In Animations */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slide-in-up {
+    animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slide-in-down {
+    animation: slideInDown 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Scale Pop */
+@keyframes scalePop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.scale-pop {
+    animation: scalePop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Glow Intensify */
+@keyframes glowIntensify {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 5px rgba(0, 255, 255, 0.5),
+            0 0 10px rgba(0, 255, 255, 0.3),
+            0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 30px rgba(0, 255, 255, 0.6),
+            0 0 40px rgba(0, 255, 255, 0.4),
+            0 0 50px rgba(0, 255, 255, 0.2);
+    }
+}
+
+.glow-intensify {
+    animation: glowIntensify 2s ease-in-out infinite;
+}
+
+/* Achievement Unlock */
+@keyframes achievementUnlock {
+    0% {
+        transform: translateY(100px) scale(0.5) rotate(-10deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.achievement-unlock {
+    animation: achievementUnlock 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Rotate 3D */
+@keyframes rotate3D {
+    0% {
+        transform: rotate3d(1, 1, 1, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(1, 1, 1, 360deg);
+    }
+}
+
+.rotate-3d {
+    animation: rotate3D 20s linear infinite;
+}
+
+/* Matrix Rain Effect */
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Stagger Delay Utilities */
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+
+.stagger-5 {
+    animation-delay: 0.5s;
+}
+
+.stagger-6 {
+    animation-delay: 0.6s;
+}
+
+.stagger-7 {
+    animation-delay: 0.7s;
+}
+
+.stagger-8 {
+    animation-delay: 0.8s;
+}
+
+/* Hexagon Clip Path */
+.hexagon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Terminal Cursor */
+@keyframes terminalCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1em;
+    background: #00ffff;
+    animation: terminalCursor 1s step-end infinite;
+}
+
+/* Pixel Transition */
+@keyframes pixelate {
+    0% {
+        filter: blur(0px);
+    }
+
+    50% {
+        filter: blur(5px);
+    }
+
+    100% {
+        filter: blur(0px);
+    }
+}
+
+/* RGB Split */
+.rgb-split {
+    position: relative;
+}
+
+.rgb-split::before,
+.rgb-split::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rgb-split::before {
+    color: #ff00ff;
+    z-index: -1;
+    animation: glitchBefore 0.3s infinite;
+}
+
+.rgb-split::after {
+    color: #00ffff;
+    z-index: -2;
+    animation: glitchAfter 0.3s infinite;
+}
+
+@keyframes glitchBefore {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(-2px, 2px);
+    }
+
+    66% {
+        transform: translate(2px, -2px);
+    }
+}
+
+@keyframes glitchAfter {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(2px, -2px);
+    }
+
+    66% {
+        transform: translate(-2px, 2px);
+    }
+}
+
+/* Zoom In/Out Pulse */
+@keyframes zoomPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.zoom-pulse {
+    animation: zoomPulse 2s ease-in-out infinite;
+}
+
+/* Zoom In on Scroll */
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.zoom-in {
+    animation: zoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Zoom Out on Scroll */
+@keyframes zoomOut {
+    0% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.zoom-out {
+    animation: zoomOut 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Rotate In */
+@keyframes rotateIn {
+    0% {
+        transform: rotate(-180deg) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+.rotate-in {
+    animation: rotateIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Continuous Slow Rotation */
+@keyframes rotateLoop {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-loop {
+    animation: rotateLoop 20s linear infinite;
+}
+
+.rotate-loop-fast {
+    animation: rotateLoop 10s linear infinite;
+}
+
+/* Card Flip */
+@keyframes cardFlip {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+}
+
+.card-flip {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card-flip:hover {
+    transform: perspective(1000px) rotateY(10deg);
+}
+
+/* Flip In X */
+@keyframes flipInX {
+    0% {
+        transform: perspective(1000px) rotateX(-90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: perspective(1000px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+.flip-in-x {
+    animation: flipInX 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Flip In Y */
+@keyframes flipInY {
+    0% {
+        transform: perspective(1000px) rotateY(-90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.flip-in-y {
+    animation: flipInY 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.bounce-in {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Swing */
+@keyframes swing {
+    20% {
+        transform: rotate(15deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.swing {
+    transform-origin: top center;
+    animation: swing 1s ease-in-out;
+}
+
+/* Wobble */
+@keyframes wobble {
+
+    0%,
+    100% {
+        transform: translateX(0%);
+    }
+
+    15% {
+        transform: translateX(-25px) rotate(-5deg);
+    }
+
+    30% {
+        transform: translateX(20px) rotate(3deg);
+    }
+
+    45% {
+        transform: translateX(-15px) rotate(-3deg);
+    }
+
+    60% {
+        transform: translateX(10px) rotate(2deg);
+    }
+
+    75% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+}
+
+.wobble {
+    animation: wobble 1s ease-in-out;
+}
+
+/* Tada */
+@keyframes tada {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    10%,
+    20% {
+        transform: scale(0.9) rotate(-3deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    40%,
+    60%,
+    80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+}
+
+.tada {
+    animation: tada 1s ease-in-out;
+}
+
+/* Heartbeat */
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10%,
+    30% {
+        transform: scale(1.1);
+    }
+
+    20%,
+    40% {
+        transform: scale(1);
+    }
+}
+
+.heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Rubber Band */
+@keyframes rubberBand {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scaleX(1.25) scaleY(0.75);
+    }
+
+    40% {
+        transform: scaleX(0.75) scaleY(1.25);
+    }
+
+    50% {
+        transform: scaleX(1.15) scaleY(0.85);
+    }
+
+    65% {
+        transform: scaleX(0.95) scaleY(1.05);
+    }
+
+    75% {
+        transform: scaleX(1.05) scaleY(0.95);
+    }
+}
+
+.rubber-band {
+    animation: rubberBand 1s ease-in-out;
+}
+
+/* Jello */
+@keyframes jello {
+
+    0%,
+    100% {
+        transform: skewX(0deg) skewY(0deg);
+    }
+
+    30% {
+        transform: skewX(25deg) skewY(25deg);
+    }
+
+    40% {
+        transform: skewX(-20deg) skewY(-20deg);
+    }
+
+    50% {
+        transform: skewX(15deg) skewY(15deg);
+    }
+
+    65% {
+        transform: skewX(-10deg) skewY(-10deg);
+    }
+
+    75% {
+        transform: skewX(5deg) skewY(5deg);
+    }
+}
+
+.jello {
+    animation: jello 1s ease-in-out;
+}
+
+/* Rotate and Zoom */
+@keyframes rotateZoom {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.rotate-zoom {
+    animation: rotateZoom 2s ease-in-out infinite;
+}
+
+/* Card Expansion Animation */
+@keyframes expandCard {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.expand-card {
+    animation: expandCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Project Card Hover - Stable */
+.project-card {
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    z-index: 10;
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

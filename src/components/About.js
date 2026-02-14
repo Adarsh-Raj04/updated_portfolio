@@ -1,3 +1,5 @@
+import { ChevronDown } from 'lucide-react';
+
 export default function About() {
     const stats = [
         { value: '2+', label: 'YEARS AT GSK', color: 'text-blue-400' },
@@ -65,6 +67,19 @@ export default function About() {
                     </div>
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#experience"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Experience section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }

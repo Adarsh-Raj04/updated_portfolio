@@ -1,4 +1,4 @@
-import { GraduationCap, Calendar, MapPin, BookOpen, Award } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, BookOpen, Award, ChevronDown } from 'lucide-react';
 
 export default function Education() {
     const focusAreas = [
@@ -12,7 +12,7 @@ export default function Education() {
     ];
 
     return (
-        <section id="education" className="py-32">
+        <section id="education" className="py-32 relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -81,6 +81,19 @@ export default function Education() {
                     </div>
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#certifications"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Certifications section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }

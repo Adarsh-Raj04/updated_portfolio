@@ -1,6 +1,8 @@
-import { MapPin } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Experience() {
+    const [expandedJob, setExpandedJob] = useState(0); // First job expanded by default
     const experience = [
         {
             title: "Data & AI Engineer",
@@ -35,7 +37,7 @@ export default function Experience() {
     ];
 
     return (
-        <section id="experience" className="py-32 bg-gradient-to-b from-transparent to-[#0f172a]/50">
+        <section id="experience" className="py-32 bg-gradient-to-b from-transparent to-[#0f172a]/50 relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -47,18 +49,31 @@ export default function Experience() {
                     {experience.map((job, index) => (
                         <div key={index} className="relative">
                             {/* Timeline dot — blue for current, purple for previous */}
-                            <div className={`absolute -left-8 top-2 w-4 h-4 rounded-full ring-4 ${index === 0
-                                ? 'bg-blue-500 ring-blue-500/20'
-                                : 'bg-purple-500 ring-purple-500/20'
-                                }`} />
+                            <div className={`absolute -left-8 top-2 w-4 h-4 rounded-full ring-4 transition-all duration-300 cursor-pointer ${
+                                index === 0
+                                    ? 'bg-blue-500 ring-blue-500/20'
+                                    : 'bg-purple-500 ring-purple-500/20'
+                            } ${expandedJob === index ? 'scale-125' : 'scale-100'}`} 
+                            onClick={() => setExpandedJob(expandedJob === index ? -1 : index)}
+                            />
 
-                            <div className="gradient-border rounded-xl p-8 ml-4">
-                                <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
-                                    <div>
-                                        <h3 className="font-orbitron text-xl font-bold text-blue-300 mb-2">
-                                            {job.title}
-                                        </h3>
-                                        <div className="font-space text-lg text-purple-300">
+                            <div className="gradient-border rounded-xl p-8 ml-4 transition-all duration-300 hover:scale-[1.02]">
+                                <div 
+                                    className="flex items-start justify-between mb-6 flex-wrap gap-4 cursor-pointer"
+                                    onClick={() => setExpandedJob(expandedJob === index ? -1 : index)}
+                                >
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3">
+                                            <h3 className="font-orbitron text-xl font-bold text-blue-300">
+                                                {job.title}
+                                            </h3>
+                                            <ChevronRight 
+                                                className={`w-5 h-5 text-blue-400 transition-transform duration-300 ${
+                                                    expandedJob === index ? 'rotate-90' : ''
+                                                }`}
+                                            />
+                                        </div>
+                                        <div className="font-space text-lg text-purple-300 mt-2">
                                             {job.company}
                                         </div>
                                         <div className="font-jetbrains text-sm text-gray-400 mt-1 flex items-center gap-2">
@@ -71,28 +86,54 @@ export default function Experience() {
                                     </div>
                                 </div>
 
-                                <ul className="space-y-3 font-jetbrains text-gray-300 text-sm leading-relaxed">
-                                    {job.highlights.map((highlight, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <span className="text-blue-400 mt-0.5 shrink-0">▹</span>
-                                            {/* Bold the metric numbers inline */}
-                                            <span dangerouslySetInnerHTML={{
-                                                __html: highlight
-                                                    .replace(/90%/g, '<strong class="text-white">90%</strong>')
-                                                    .replace(/99\.6%/g, '<strong class="text-white">99.6%</strong>')
-                                                    .replace(/87\.5%/g, '<strong class="text-white">87.5%</strong>')
-                                                    .replace(/~200 hours\/year saved/g, '<strong class="text-white">~200 hours/year saved</strong>')
-                                                    .replace(/30 min → 7 sec/g, '<strong class="text-white">30 min → 7 sec</strong>')
-                                                    .replace(/8 hours down to 1 hour/g, '<strong class="text-white">8 hours down to 1 hour</strong>')
-                                            }} />
-                                        </li>
-                                    ))}
-                                </ul>
+                                {/* Expandable highlights */}
+                                <div 
+                                    className={`overflow-hidden transition-all duration-500 ${
+                                        expandedJob === index ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+                                    }`}
+                                >
+                                    <ul className="space-y-3 font-jetbrains text-gray-300 text-sm leading-relaxed">
+                                        {job.highlights.map((highlight, i) => (
+                                            <li key={i} className="flex items-start gap-3 fade-in-up" style={{ animationDelay: `${i * 0.05}s` }}>
+                                                <span className="text-blue-400 mt-0.5 shrink-0">▹</span>
+                                                <span dangerouslySetInnerHTML={{
+                                                    __html: highlight
+                                                        .replace(/90%/g, '<strong class="text-white">90%</strong>')
+                                                        .replace(/99\.6%/g, '<strong class="text-white">99.6%</strong>')
+                                                        .replace(/87\.5%/g, '<strong class="text-white">87.5%</strong>')
+                                                        .replace(/~200 hours\/year saved/g, '<strong class="text-white">~200 hours/year saved</strong>')
+                                                        .replace(/30 min → 7 sec/g, '<strong class="text-white">30 min → 7 sec</strong>')
+                                                        .replace(/8 hours down to 1 hour/g, '<strong class="text-white">8 hours down to 1 hour</strong>')
+                                                }} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* Show preview when collapsed */}
+                                {expandedJob !== index && (
+                                    <p className="font-jetbrains text-sm text-gray-400 mt-4">
+                                        Click to expand {job.highlights.length} key achievements...
+                                    </p>
+                                )}
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#skills"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Skills section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }

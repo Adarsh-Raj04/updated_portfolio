@@ -9,8 +9,19 @@ import Achievements from './components/Achievements';
 import Participation from './components/Participation';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
+import GitHubStats from './components/GitHubStats';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AnimatedBackground from './components/AnimatedBackground';
+import ParticleBackground from './components/ParticleBackground';
+import ParallaxLayer from './components/ParallaxLayer';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
+import EasterEggs from './components/EasterEggs';
+import SoundEffects from './components/SoundEffects';
+import Terminal from './components/Terminal';
+import CursorSelector from './components/CursorSelector';
+import './animations.css';
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -25,7 +36,23 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black text-white">
+    <main className="min-h-screen"
+      style={{
+        color: 'var(--text-primary)',
+        position: 'relative'
+      }}
+    >
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
+
+      {/* Animated Gradient Background */}
+      <AnimatedBackground />
+
+      {/* Particle Network Effect - Medium parallax */}
+      <ParallaxLayer speed={0.3}>
+        <ParticleBackground />
+      </ParallaxLayer>
+
       {/* Cursor Glow Effect */}
       <div
         className="cursor-glow"
@@ -34,6 +61,9 @@ export default function Home() {
           top: `${mousePosition.y}px`
         }}
       />
+
+      {/* Easter Eggs */}
+      <EasterEggs />
 
       <Navbar />
       <Hero />
@@ -45,8 +75,21 @@ export default function Home() {
       <Participation />
       <Education />
       <Certifications />
+      <GitHubStats />
       <Contact />
       <Footer />
+
+      {/* Back to Top Button */}
+      <BackToTop />
+
+      {/* Sound Effects Toggle */}
+      <SoundEffects />
+
+      {/* Cursor Selector */}
+      <CursorSelector />
+
+      {/* Terminal */}
+      <Terminal />
     </main>
   );
 }

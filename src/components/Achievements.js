@@ -1,4 +1,5 @@
-import { Award, Zap, GitMerge, Search, Trophy, Users, Star, Heart } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Award, Zap, GitMerge, Search, Trophy, Users, Star, Heart, ChevronDown } from 'lucide-react';
 
 export default function Achievements() {
     const achievements = [
@@ -69,8 +70,32 @@ export default function Achievements() {
 
     ];
 
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+
     return (
-        <section id="achievements" className="py-32 bg-gradient-to-b from-transparent to-[#0f172a]/50">
+        <section ref={sectionRef} id="achievements" className="py-32 bg-gradient-to-b from-transparent to-[#0f172a]/50 relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -82,10 +107,15 @@ export default function Achievements() {
                     {achievements.map((achievement, index) => (
                         <div
                             key={index}
-                            className="gradient-border rounded-xl p-8 hover:scale-105 transition-transform group"
+                            className={`gradient-border rounded-xl p-8 hover:scale-105 transition-all group ${isVisible ? `bounce-in stagger-${(index % 8) + 1}` : 'opacity-0'
+                                }`}
+                            style={{ opacity: isVisible ? 1 : 0 }}
                         >
-                            {/* Icon */}
-                            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${achievement.color} flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-blue-500/30 transition-shadow`}>
+                            {/* Icon with rotation */}
+                            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${achievement.color} flex items-center justify-center mb-6 group-hover:rotate-loop-fast transition-shadow`}
+                                style={{
+                                    boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
+                                }}>
                                 {achievement.icon}
                             </div>
 
@@ -107,6 +137,19 @@ export default function Achievements() {
                     ))}
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#participation"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('participation')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Participation section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }

@@ -1,0 +1,372 @@
+/* ========================================
+   DIRECTOR-LEVEL ROCKET COMPANION
+   Premium Interactive Experience
+   ======================================== */
+
+.rocket-companion {
+    will-change: left, top, transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   ROCKET STATES
+   ======================================== */
+
+/* Navbar State - Gentle Float */
+.rocket-companion.state-navbar .rocket-icon {
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+}
+
+/* Roaming State - Exploratory Movement */
+.rocket-companion.state-roaming .rocket-icon {
+    animation: explore 4s ease-in-out infinite;
+}
+
+@keyframes explore {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.05) rotate(5deg);
+    }
+
+    50% {
+        transform: scale(0.95) rotate(-5deg);
+    }
+
+    75% {
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+
+/* Following State - Dynamic Movement */
+.rocket-companion.state-following .rocket-icon {
+    animation: following 1s ease-in-out infinite;
+}
+
+@keyframes following {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Navigating State - Power Mode */
+.rocket-companion.state-navigating .rocket-icon {
+    animation: powerMode 0.4s ease-in-out infinite;
+}
+
+@keyframes powerMode {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.8));
+    }
+
+    50% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 50px rgba(0, 255, 255, 1));
+    }
+}
+
+/* ========================================
+   VISUAL EFFECTS
+   ======================================== */
+
+/* Rocket Container */
+.rocket-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+.rocket-icon {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translate3d(0, 0, 0);
+}
+
+/* Flame Trail - Enhanced */
+.rocket-flame {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    pointer-events: none;
+}
+
+.flame-particle {
+    position: absolute;
+    width: 10px;
+    height: 16px;
+    background: linear-gradient(to bottom,
+            rgba(255, 220, 0, 1),
+            rgba(255, 140, 0, 0.9),
+            rgba(255, 60, 0, 0.6),
+            rgba(255, 0, 0, 0.3),
+            transparent);
+    border-radius: 50%;
+    animation: flameRise 0.3s ease-out infinite;
+    filter: blur(1px);
+}
+
+.flame-particle:nth-child(1) {
+    left: 5px;
+    animation-delay: 0s;
+}
+
+.flame-particle:nth-child(2) {
+    left: 15px;
+    animation-delay: 0.1s;
+}
+
+.flame-particle:nth-child(3) {
+    left: 25px;
+    animation-delay: 0.2s;
+}
+
+@keyframes flameRise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(40px) scale(0.3);
+        opacity: 0;
+    }
+}
+
+/* Sparkles for Roaming */
+.sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle,
+            rgba(0, 255, 255, 1),
+            rgba(0, 255, 255, 0.5),
+            transparent);
+    border-radius: 50%;
+    animation: sparkleFloat 2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+.sparkle:nth-child(1) {
+    top: -15px;
+    left: -15px;
+}
+
+.sparkle:nth-child(2) {
+    top: -10px;
+    right: -15px;
+}
+
+.sparkle:nth-child(3) {
+    bottom: -15px;
+    left: 50%;
+}
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+    }
+
+    25% {
+        transform: translate(8px, -8px) scale(1.2);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-8px, 8px) scale(0.8);
+        opacity: 0.7;
+    }
+
+    75% {
+        transform: translate(8px, 8px) scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   MESSAGE BUBBLE - Premium Design
+   ======================================== */
+
+.rocket-message {
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 20, 40, 0.95));
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--accent-cyan);
+    border-radius: 16px;
+    padding: 12px 20px;
+    color: var(--accent-cyan);
+    font-family: var(--font-space);
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow:
+        0 0 30px rgba(0, 255, 255, 0.5),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+    animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    letter-spacing: 0.5px;
+}
+
+.message-arrow {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid var(--accent-cyan);
+}
+
+.message-arrow::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: -6px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 8px solid rgba(0, 0, 0, 0.95);
+}
+
+@keyframes messageSlideIn {
+    0% {
+        transform: translateY(-50%) translateX(-20px) scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(-50%) translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   SCROLL PROGRESS BAR - Cinematic
+   ======================================== */
+
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    animation: progressBarSlideIn 0.3s ease-out;
+}
+
+.scroll-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(0, 255, 255, 0.8),
+            rgba(0, 200, 255, 1),
+            rgba(0, 255, 255, 0.8));
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes progressBarSlideIn {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ========================================
+   RESPONSIVE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .rocket-icon {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .rocket-message {
+        font-size: 12px;
+        padding: 8px 14px;
+        left: 50px;
+    }
+}
+
+/* ========================================
+   PERFORMANCE HINTS
+   ======================================== */
+
+.rocket-companion,
+.rocket-icon,
+.flame-particle,
+.sparkle,
+.scroll-progress-fill {
+    will-change: transform, opacity;
+}

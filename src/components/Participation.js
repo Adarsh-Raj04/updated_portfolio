@@ -1,4 +1,4 @@
-import { Trophy, Calendar, Users, Award, Code, ExternalLink } from 'lucide-react';
+import { Trophy, Calendar, Users, Award, Code, ExternalLink, ChevronDown } from 'lucide-react';
 
 export default function Participation() {
     const participations = [
@@ -44,7 +44,7 @@ export default function Participation() {
     ];
 
     return (
-        <section id="participation" className="py-32 bg-gradient-to-b from-[#0f172a]/50 to-transparent">
+        <section id="participation" className="py-32 bg-gradient-to-b from-[#0f172a]/50 to-transparent relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -136,6 +136,19 @@ export default function Participation() {
                     ))}
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#education"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Education section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }

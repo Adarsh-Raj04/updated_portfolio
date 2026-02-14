@@ -1,4 +1,4 @@
-import { Award, CheckCircle2, ExternalLink } from 'lucide-react';
+import { Award, CheckCircle2, ExternalLink, ChevronDown } from 'lucide-react';
 
 export default function Certifications() {
     const certifications = [
@@ -54,7 +54,7 @@ export default function Certifications() {
     ];
 
     return (
-        <section id="certifications" className="py-32 bg-gradient-to-b from-[#0f172a]/50 to-transparent">
+        <section id="certifications" className="py-32 bg-gradient-to-b from-[#0f172a]/50 to-transparent relative">
             <div className="max-w-6xl mx-auto px-6">
                 <h2 className="font-orbitron text-5xl font-bold mb-16 text-center">
                     <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -126,6 +126,19 @@ export default function Certifications() {
                     ))}
                 </div>
             </div>
+
+            {/* Scroll Indicator */}
+            <a 
+                href="#contact"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator cursor-pointer transition-all duration-300 hover:scale-110"
+                onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                aria-label="Scroll to Contact section"
+            >
+                <ChevronDown className="w-8 h-8" style={{ color: 'var(--accent-cyan)' }} />
+            </a>
         </section>
     );
 }
