@@ -432,3 +432,41 @@ body {
     pointer-events: none;
     border-radius: inherit;
 }
+
+
+
+
+
+
+
+
+
+
+.hacker-mode {
+  background: black !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 8px #00ff00;
+}
+
+
+.dev-mode {
+  filter: contrast(1.2) brightness(1.1);
+}
+
+.love-mode {
+  filter: hue-rotate(300deg);
+}
+
+/* Hide particles when toggled - Force override all styles */
+body.hide-particles canvas.fixed {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  display: none !important;
+}
+
+body.hide-particles canvas {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+}
