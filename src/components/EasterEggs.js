@@ -216,7 +216,6 @@ export default function EasterEggs() {
                 return; // Don't trigger single key commands during rapid typing
             }
 
-
             // T - Open Terminal
             if (key === 't') {
                 // Trigger terminal open by simulating click on terminal button
@@ -230,7 +229,7 @@ export default function EasterEggs() {
 
             // C - Toggle Cursor Effects
             if (key === 'c') {
-                const cursorGlow = document.querySelector('.cursor-glow');
+                const cursorGlow = document.querySelector('.cursor-glow-enhanced');
                 if (cursorGlow) {
                     cursorGlow.style.display = cursorGlow.style.display === 'none' ? 'block' : 'none';
                     showPopup('✨ Cursor Effects Toggled');

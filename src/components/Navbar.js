@@ -141,19 +141,27 @@ export default function Navbar() {
     return (
         <nav
             ref={menuRef}
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg border-b' : 'bg-transparent'
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl border-b' : 'bg-transparent'
                 }`}
             style={{
-                backgroundColor: isScrolled ? 'rgba(10, 14, 26, 0.8)' : 'transparent',
-                borderColor: isScrolled ? 'var(--border-primary)' : 'transparent'
+                backgroundColor: isScrolled ? 'rgba(10, 14, 26, 0.7)' : 'transparent',
+                borderColor: isScrolled ? 'rgba(0, 255, 255, 0.2)' : 'transparent',
+                boxShadow: isScrolled ? '0 8px 32px rgba(0, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)' : 'none',
+                backdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'none',
+                WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'none'
             }}
         >
             <div className="max-w-7xl mx-auto px-6 py-4">
                 <div className="flex items-center justify-between">
 
                     {/* Logo */}
-                    <a href="#hero" className="font-orbitron text-2xl font-bold shrink-0 holographic">
-                        ADARSH.
+                    <a href="#hero" className="font-orbitron text-2xl font-bold shrink-0 relative group">
+                        <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                            ADARSH.
+                        </span>
+                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300">
+                            ADARSH.
+                        </span>
                     </a>
 
                     {/* Desktop Navigation */}
@@ -188,17 +196,16 @@ export default function Navbar() {
                                 onClick={toggleTheme}
                                 className="p-2 rounded-lg backdrop-blur-md border transition-all duration-300 hover:scale-110 group"
                                 style={{
-                                    background: theme === 'dark'
-                                        ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))'
-                                        : 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15))',
-                                    borderColor: 'var(--border-primary)',
+                                    background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
+                                    borderColor: 'rgba(0, 255, 255, 0.3)',
+                                    boxShadow: '0 0 10px rgba(0, 255, 255, 0.2)'
                                 }}
                                 aria-label="Toggle theme"
                             >
                                 {theme === 'dark' ? (
-                                    <FiSun className="w-4 h-4 text-yellow-400 transition-transform group-hover:rotate-180 duration-500" />
+                                    <FiSun className="w-4 h-4 text-cyan-400 transition-transform group-hover:rotate-180 duration-500" />
                                 ) : (
-                                    <FiMoon className="w-4 h-4 text-blue-600 transition-transform group-hover:-rotate-12 duration-500" />
+                                    <FiMoon className="w-4 h-4 text-purple-500 transition-transform group-hover:-rotate-12 duration-500" />
                                 )}
                             </button>
 
@@ -207,7 +214,29 @@ export default function Navbar() {
                                 target="_blank"
                                 href="/Adarsh_Raj_Resume.pdf"
                                 download
-                                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-blue-500/50 hover:border-blue-400 hover:bg-blue-500/10 text-blue-400 hover:text-blue-300 transition-all font-space text-xs whitespace-nowrap"
+                                onClick={async () => {
+                                    // Track resume download silently
+                                    try {
+                                        await fetch('/.netlify/functions/counter?action=up&counter=adarsh04-p-resume');
+                                    } catch (error) {
+                                        // Silent fail - don't interrupt download
+                                        console.log('Resume download tracked');
+                                    }
+                                }}
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg border transition-all font-space text-xs whitespace-nowrap group relative overflow-hidden"
+                                style={{
+                                    borderColor: 'rgba(0, 255, 255, 0.4)',
+                                    background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
+                                    color: '#00ffff'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.8)';
+                                    e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.4)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.4)';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                }}
                             >
                                 <Download className="w-3.5 h-3.5" />
                                 Resume
@@ -223,17 +252,15 @@ export default function Navbar() {
                                 onClick={toggleTheme}
                                 className="p-2 rounded-lg backdrop-blur-md border transition-all duration-300"
                                 style={{
-                                    background: theme === 'dark'
-                                        ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))'
-                                        : 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15))',
-                                    borderColor: 'var(--border-primary)',
+                                    background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
+                                    borderColor: 'rgba(0, 255, 255, 0.3)',
                                 }}
                                 aria-label="Toggle theme"
                             >
                                 {theme === 'dark' ? (
-                                    <FiSun className="w-4 h-4 text-yellow-400" />
+                                    <FiSun className="w-4 h-4 text-cyan-400" />
                                 ) : (
-                                    <FiMoon className="w-4 h-4 text-blue-600" />
+                                    <FiMoon className="w-4 h-4 text-purple-500" />
                                 )}
                             </button>
 
@@ -241,14 +268,27 @@ export default function Navbar() {
                                 target="_blank"
                                 href="/Adarsh_Raj_Resume.pdf"
                                 download
-                                className="text-blue-400 hover:text-blue-300 transition-colors"
+                                onClick={async () => {
+                                    // Track resume download silently
+                                    try {
+                                        await fetch('/.netlify/functions/counter?action=up&counter=adarsh04-p-resume');
+                                    } catch (error) {
+                                        // Silent fail - don't interrupt download
+                                        console.log('Resume download tracked');
+                                    }
+                                }}
+                                className="transition-colors"
+                                style={{ color: '#00ffff' }}
                                 aria-label="Download Resume"
                             >
                                 <Download className="w-5 h-5" />
                             </a>
                             <button
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="text-gray-400 hover:text-blue-400 transition-colors"
+                                className="transition-colors"
+                                style={{ color: '#64748b' }}
+                                onMouseEnter={(e) => e.currentTarget.style.color = '#00ffff'}
+                                onMouseLeave={(e) => e.currentTarget.style.color = '#64748b'}
                                 aria-label="Toggle menu"
                             >
                                 {isMobileMenuOpen
@@ -266,14 +306,24 @@ export default function Navbar() {
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                             }`}
                     >
-                        <div className="mt-4 py-4 border-t border-blue-500/20 flex flex-col space-y-4 font-space text-sm">
+                        <div className="mt-4 py-4 border-t flex flex-col space-y-4 font-space text-sm"
+                            style={{ borderColor: 'rgba(0, 255, 255, 0.2)' }}
+                        >
                             {navItems.map((item) => (
                                 <a
                                     key={item.name}
                                     href={item.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className={`hover:text-blue-400 transition-colors ${isActive(item.href) ? 'text-blue-400' : 'text-gray-400'
-                                        }`}
+                                    className="transition-colors"
+                                    style={{
+                                        color: isActive(item.href) ? '#00ffff' : '#64748b'
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.color = '#00ffff'}
+                                    onMouseLeave={(e) => {
+                                        if (!isActive(item.href)) {
+                                            e.currentTarget.style.color = '#64748b';
+                                        }
+                                    }}
                                 >
                                     {item.name}
                                 </a>
