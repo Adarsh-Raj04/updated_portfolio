@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Landing Animation for the portfolio */}
+      {/* Landing Animation for the portfolio with some enhancements*/}
       <LandingAnimation onComplete={() => setShowContent(true)} />
 
       <main
