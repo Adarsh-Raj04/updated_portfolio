@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Experience from "./components/Experience";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import Skills from "./components/Skills";
 import Achievements from "./components/Achievements";
-import Participation from "./components/Participation";
 import Education from "./components/Education";
 import Certifications from "./components/Certifications";
-import GitHubStats from "./components/GitHubStats";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AnimatedBackground from "./components/AnimatedBackground";
@@ -65,13 +63,11 @@ export default function Home() {
         <Hero />
         <About />
         <Experience />
-        <Skills />
         <Projects />
+        <Skills />
         <Achievements />
-        <Participation />
         <Education />
         <Certifications />
-        <GitHubStats />
         <Contact />
         <Footer />
 

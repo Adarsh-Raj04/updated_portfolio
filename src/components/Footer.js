@@ -1,76 +1,84 @@
-import { Mail, Linkedin, Github, Heart } from 'lucide-react';
+import { Github, Heart, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
-    return (
-        <footer className="py-12 border-t border-blue-500/20 bg-gradient-to-b from-transparent to-black/50">
-            <div className="max-w-6xl mx-auto px-6">
+  return (
+    <footer className="border-t border-white/10 bg-gradient-to-b from-transparent to-black/50 py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-8 text-center">
+          <div className="mb-3 font-orbitron text-2xl font-bold text-blue-100">
+            <span className="text-blue-400">A</span>DARSH
+            <span className="text-purple-400">.</span>
+          </div>
+          <p
+            className="font-jetbrains text-sm"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Turning data into intelligence, one integration at a time.
+          </p>
+        </div>
 
-                {/* Logo and Tagline */}
-                <div className="text-center mb-8">
-                    <div className="font-orbitron text-2xl font-bold mb-2 glow-text">
-                        <span className="text-blue-400">A</span>DARSH<span className="text-purple-400">.</span>
-                    </div>
-                    <p className="font-jetbrains text-gray-500 text-sm">
-                        Turning data into intelligence, one integration at a time
-                    </p>
-                </div>
+        <div className="mb-8 flex flex-wrap justify-center gap-4">
+          {[
+            {
+              label: "Email",
+              href: "mailto:Adarsh.Raj.2004@outlook.com",
+              icon: Mail,
+            },
+            {
+              label: "LinkedIn",
+              href: "https://linkedin.com/in/adarsh-raj04",
+              icon: Linkedin,
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/adarsh-raj04",
+              icon: Github,
+            },
+          ].map(({ label, href, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:text-cyan-300"
+              aria-label={label}
+            >
+              <Icon className="h-5 w-5" />
+            </a>
+          ))}
+        </div>
 
-                {/* Social Links */}
-                <div className="flex justify-center gap-6 mb-8">
-                    <a
-                        href="mailto:Adarsh.Raj.2004@outlook.com"
-                        className="text-gray-500 hover:text-blue-400 transition-colors"
-                        aria-label="Email"
-                    >
-                        <Mail className="w-5 h-5" />
-                    </a>
-                    <a
-                        href="https://linkedin.com/in/adarsh-raj04"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 hover:text-blue-400 transition-colors"
-                        aria-label="LinkedIn"
-                    >
-                        <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a
-                        href="https://github.com/adarsh-raj04"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 hover:text-blue-400 transition-colors"
-                        aria-label="GitHub"
-                    >
-                        <Github className="w-5 h-5" />
-                    </a>
-                </div>
+        <div className="mb-8 flex flex-wrap justify-center gap-6">
+          {[
+            ["About", "#about"],
+            ["Experience", "#experience"],
+            ["Projects", "#projects"],
+            ["Contact", "#contact"],
+          ].map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              className="font-space text-sm transition-colors duration-300 hover:text-cyan-300"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
 
-                {/* Quick Links */}
-                <div className="flex justify-center gap-8 mb-8 flex-wrap">
-                    <a href="#about" className="font-space text-sm text-gray-500 hover:text-blue-400 transition-colors">
-                        About
-                    </a>
-                    <a href="#experience" className="font-space text-sm text-gray-500 hover:text-blue-400 transition-colors">
-                        Experience
-                    </a>
-                    <a href="#projects" className="font-space text-sm text-gray-500 hover:text-blue-400 transition-colors">
-                        Projects
-                    </a>
-                    <a href="#contact" className="font-space text-sm text-gray-500 hover:text-blue-400 transition-colors">
-                        Contact
-                    </a>
-                </div>
-
-                {/* Copyright */}
-                <div className="text-center">
-                    <p className="font-jetbrains text-gray-600 text-sm flex items-center justify-center gap-2">
-                        <span>© {currentYear} Adarsh Raj. Crafted with</span>
-                        <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-                        <span>and passion</span>
-                    </p>
-                </div>
-            </div>
-        </footer>
-    );
+        <div className="text-center">
+          <p
+            className="flex flex-wrap items-center justify-center gap-2 font-jetbrains text-sm"
+            style={{ color: "var(--text-muted)" }}
+          >
+            <span>© {currentYear} Adarsh Raj. Crafted with</span>
+            <Heart className="h-4 w-4 text-red-500 fill-red-500" />
+            <span>and purpose.</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 }

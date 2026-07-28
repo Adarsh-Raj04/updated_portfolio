@@ -1,29 +1,40 @@
-import { Eye, Heart } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { Eye, Heart } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 const AnimatedNumber = ({ value, duration = 1000 }) => {
   const [displayValue, setDisplayValue] = useState(0);
+  const displayValueRef = useRef(0);
 
   useEffect(() => {
-    if (!value) return;
-    
-    const startTime = Date.now();
-    const startValue = displayValue;
-    
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
+    displayValueRef.current = displayValue;
+  }, [displayValue]);
+
+  useEffect(() => {
+    if (!Number.isFinite(value)) return;
+
+    const startValue = displayValueRef.current;
+    const startTime = performance.now();
+    let frameId;
+
+    const animate = (now) => {
+      const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
-      const currentValue = Math.floor(startValue + (value - startValue) * progress);
+      const currentValue = Math.floor(
+        startValue + (value - startValue) * progress,
+      );
+
+      displayValueRef.current = currentValue;
       setDisplayValue(currentValue);
-      
+
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        frameId = requestAnimationFrame(animate);
       }
     };
-    
-    requestAnimationFrame(animate);
-  }, [value]);
+
+    frameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [value, duration]);
 
   return <>{displayValue?.toLocaleString()}</>;
 };
@@ -62,8 +73,8 @@ export default function PortfolioCounter() {
   useEffect(() => {
     isMounted.current = true;
 
-    const liked = localStorage.getItem('portfolio-liked');
-    setHasLiked(liked === 'true');
+    const liked = localStorage.getItem("portfolio-liked");
+    setHasLiked(liked === "true");
 
     if (!hasIncrementedVisit.current) {
       hasIncrementedVisit.current = true;
@@ -79,7 +90,9 @@ export default function PortfolioCounter() {
   }, []);
 
   const playClickSound = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioContext = new (
+      window.AudioContext || window.webkitAudioContext
+    )();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 
@@ -87,17 +100,20 @@ export default function PortfolioCounter() {
     gainNode.connect(audioContext.destination);
 
     oscillator.frequency.value = 800;
-    oscillator.type = 'sine';
+    oscillator.type = "sine";
     gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.01,
+      audioContext.currentTime + 0.2,
+    );
 
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.2);
   };
 
   const speakThanks = () => {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance('Thanks for the support!');
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance("Thanks for the support!");
       utterance.rate = 1.2;
       utterance.pitch = 1.1;
       utterance.volume = 0.5;
@@ -107,18 +123,18 @@ export default function PortfolioCounter() {
 
   const createParticleBurst = () => {
     if (!buttonRef.current) return;
-    
+
     const rect = buttonRef.current.getBoundingClientRect();
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const newParticles = [];
-    const colors = ['#ff0080', '#00ffff', '#a855f7', '#fbbf24'];
-    
+    const colors = ["#ff0080", "#00ffff", "#a855f7", "#fbbf24"];
+
     for (let i = 0; i < 20; i++) {
       const angle = (Math.PI * 2 * i) / 20;
       const velocity = 50 + Math.random() * 30;
-      
+
       newParticles.push({
         id: Date.now() + i,
         x: centerX + Math.cos(angle) * velocity,
@@ -127,18 +143,20 @@ export default function PortfolioCounter() {
         delay: i * 20,
       });
     }
-    
+
     setParticles(newParticles);
     setTimeout(() => setParticles([]), 1000);
   };
 
   const incrementVisits = async () => {
     try {
-      const response = await fetch('/.netlify/functions/counter?action=up&counter=adarsh04-p-count');
+      const response = await fetch(
+        "/.netlify/functions/counter?action=up&counter=adarsh04-p-count",
+      );
       const data = await response.json();
       setVisits(data.data?.up_count || 0);
     } catch (error) {
-      console.error('Failed to increment visits:', error);
+      console.error("Failed to increment visits:", error);
     } finally {
       setLoading(false);
     }
@@ -147,22 +165,26 @@ export default function PortfolioCounter() {
   const fetchLikes = async () => {
     try {
       const timestamp = Date.now();
-      const response = await fetch(`/.netlify/functions/counter?action=get&counter=adarsh04-p-likes&t=${timestamp}`);
+      const response = await fetch(
+        `/.netlify/functions/counter?action=get&counter=adarsh04-p-likes&t=${timestamp}`,
+      );
       const data = await response.json();
 
       const serverCount = data.data?.up_count || 0;
-      const storedCount = localStorage.getItem('portfolio-like-count');
+      const storedCount = localStorage.getItem("portfolio-like-count");
 
       if (isMounted.current) {
-        const finalCount = storedCount ? Math.max(serverCount, parseInt(storedCount, 10)) : serverCount;
+        const finalCount = storedCount
+          ? Math.max(serverCount, parseInt(storedCount, 10))
+          : serverCount;
         setLikes(finalCount);
 
         if (serverCount >= finalCount) {
-          localStorage.setItem('portfolio-like-count', serverCount.toString());
+          localStorage.setItem("portfolio-like-count", serverCount.toString());
         }
       }
     } catch (error) {
-      console.error('Failed to fetch likes:', error);
+      console.error("Failed to fetch likes:", error);
     }
   };
 
@@ -174,8 +196,8 @@ export default function PortfolioCounter() {
 
     setLikes(newCount);
     setHasLiked(true);
-    localStorage.setItem('portfolio-liked', 'true');
-    localStorage.setItem('portfolio-like-count', newCount.toString());
+    localStorage.setItem("portfolio-liked", "true");
+    localStorage.setItem("portfolio-like-count", newCount.toString());
 
     setAnimateLike(true);
     setShowPlusOne(true);
@@ -191,22 +213,27 @@ export default function PortfolioCounter() {
     setTimeout(() => setShowLeaderboard(false), 4000);
 
     try {
-      const response = await fetch('/.netlify/functions/counter?action=up&counter=adarsh04-p-likes');
+      const response = await fetch(
+        "/.netlify/functions/counter?action=up&counter=adarsh04-p-likes",
+      );
 
-      if (!response.ok) throw new Error('Failed to increment like');
+      if (!response.ok) throw new Error("Failed to increment like");
 
       const data = await response.json();
 
       if (data.data?.up_count && data.data.up_count >= newCount) {
         setLikes(data.data.up_count);
-        localStorage.setItem('portfolio-like-count', data.data.up_count.toString());
+        localStorage.setItem(
+          "portfolio-like-count",
+          data.data.up_count.toString(),
+        );
       }
     } catch (error) {
       setLikes(currentLikes);
       setHasLiked(false);
-      localStorage.removeItem('portfolio-liked');
-      localStorage.removeItem('portfolio-like-count');
-      alert('Failed to register like. Please try again.');
+      localStorage.removeItem("portfolio-liked");
+      localStorage.removeItem("portfolio-like-count");
+      alert("Failed to register like. Please try again.");
     }
   };
 
@@ -249,12 +276,13 @@ export default function PortfolioCounter() {
 
       {/* Global Leaderboard Notification */}
       {showLeaderboard && (
-        <div 
+        <div
           className="absolute -top-16 right-0 px-4 py-2 rounded-lg backdrop-blur-md border"
           style={{
-            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
-            borderColor: 'var(--accent-pink)',
-            animation: 'leaderboard-slide 0.5s ease-out'
+            background:
+              "linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))",
+            borderColor: "var(--accent-pink)",
+            animation: "leaderboard-slide 0.5s ease-out",
           }}
         >
           <p className="font-orbitron text-xs text-pink-400">
@@ -266,11 +294,11 @@ export default function PortfolioCounter() {
       {/* Visit Counter */}
       <div
         className={`gradient-border rounded-lg px-4 py-3 backdrop-blur-sm flex items-center gap-3 transition-all duration-500 ${
-          showVisits ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          showVisits ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
-        style={{ backgroundColor: 'var(--bg-tertiary)' }}
+        style={{ backgroundColor: "var(--bg-tertiary)" }}
       >
-        <Eye className="w-5 h-5" style={{ color: 'var(--accent-cyan)' }} />
+        <Eye className="w-5 h-5" style={{ color: "var(--accent-cyan)" }} />
         <div>
           <p className="font-jetbrains text-xs text-gray-400">
             Visitors Logged
@@ -288,11 +316,11 @@ export default function PortfolioCounter() {
         onClick={handleLike}
         disabled={hasLiked}
         className={`relative gradient-border rounded-lg px-4 py-3 backdrop-blur-sm flex items-center gap-3 transition-all duration-300 overflow-visible ${
-          hasLiked ? 'opacity-80' : 'hover:scale-105'
+          hasLiked ? "opacity-80" : "hover:scale-105"
         }`}
         style={{
-          backgroundColor: 'var(--bg-tertiary)',
-          boxShadow: hasLiked ? '0 0 15px rgba(255,0,128,0.5)' : 'none'
+          backgroundColor: "var(--bg-tertiary)",
+          boxShadow: hasLiked ? "0 0 15px rgba(255,0,128,0.5)" : "none",
         }}
       >
         {/* Particle Burst */}
@@ -314,17 +342,19 @@ export default function PortfolioCounter() {
 
         <Heart
           className={`w-5 h-5 transition-all duration-300 ${
-            hasLiked ? 'fill-current scale-110' : ''
-          } ${animateLike ? 'scale-150' : ''}`}
-          style={{ color: likeMilestone ? '#FFD700' : '#ff0080' }}
+            hasLiked ? "fill-current scale-110" : ""
+          } ${animateLike ? "scale-150" : ""}`}
+          style={{ color: likeMilestone ? "#FFD700" : "#ff0080" }}
         />
 
         <div>
           <p className="font-jetbrains text-xs text-gray-400">
-            {hasLiked ? 'Liked!' : 'Appreciate'}
+            {hasLiked ? "Liked!" : "Appreciate"}
           </p>
 
-          <p className={`font-orbitron text-lg font-bold transition-all duration-300 ${animateLike ? 'scale-110' : ''}`}>
+          <p
+            className={`font-orbitron text-lg font-bold transition-all duration-300 ${animateLike ? "scale-110" : ""}`}
+          >
             <AnimatedNumber value={likes} duration={800} />
             {likeMilestone && <span className="ml-2 text-yellow-400">⭐</span>}
           </p>
