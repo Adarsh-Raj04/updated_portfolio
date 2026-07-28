@@ -41,7 +41,7 @@ export default function Navbar() {
 
   const activeSections = navItems.map((item) => item.href.slice(1));
   const resumeCta = heroData.ctas.find((cta) => cta.download) || null;
-  const resumeHref = resumeCta?.href || "/resume.pdf";
+  const resumeHref = resumeCta?.href || "/Adarsh_Raj_Resume.pdf";
   const resumeLabel = (resumeCta?.label || "Resume").replace("Download ", "");
   const logoText = `${heroData.name.split(" ")[0] || "PORTFOLIO"}.`;
 

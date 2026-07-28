@@ -62,7 +62,7 @@ export const heroData = {
     },
     {
       label: "Download Resume",
-      href: "/resume.pdf",
+      href: "/Adarsh_Raj_Resume.pdf",
       variant: "secondary",
       download: true,
     },
@@ -519,7 +519,7 @@ export const contactData = {
     {
       label: "Resume",
       value: "Download PDF",
-      href: "/resume.pdf",
+      href: "/Adarsh_Raj_Resume.pdf",
     },
   ],
   formspreeEndpoint: "https://formspree.io/f/xwpkynkj",
