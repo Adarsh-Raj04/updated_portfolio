@@ -225,25 +225,6 @@ export const experienceData = {
         "Azure DevOps",
       ],
     },
-    {
-      company: "GSK (GlaxoSmithKline)",
-      role: "Graduate Intern (Data and DevOps)",
-      duration: "January 2024 - August 2024",
-      location: "Bengaluru, Karnataka, India",
-      summary:
-        "Contributed to reporting automation and DevOps foundations while supporting team-level release efficiency.",
-      enterprisePlatforms: ["SCDT Reporting Stack", "DevOps Release Pipelines"],
-      coreEngineering: [
-        "Automated reporting workflows with Azure DevOps, Power BI, and JIRA.",
-        "Supported CI/CD setup and deployment environment automation.",
-        "Built operational practices that scaled into the full-time engineering role.",
-      ],
-      businessImpact: [
-        "Reduced manual reporting overhead for internal stakeholders.",
-        "Improved release consistency through environment standardization.",
-      ],
-      technologyStack: ["Azure DevOps", "Power BI", "JIRA", "CI/CD", "Python"],
-    },
   ],
 };
 
