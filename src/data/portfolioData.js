@@ -187,7 +187,7 @@ export const experienceData = {
     {
       company: "GSK (GlaxoSmithKline)",
       role: "Data and AI Engineer",
-      duration: "August 2024 - Present",
+      duration: "January 2024 - Present",
       location: "Bengaluru, Karnataka, India",
       summary:
         "Owning AI platform capabilities, metadata services, and cloud data products powering governance and discovery across the enterprise.",
