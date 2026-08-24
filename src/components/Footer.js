@@ -68,6 +68,24 @@ export default function Footer() {
           ))}
         </div>
 
+        <div className="mb-8 flex flex-wrap justify-center gap-6 border-t border-white/5 pt-8">
+          {[
+            ["Professional About", "/about/"],
+            ["AI Projects", "/projects/"],
+            ["Research", "/research/"],
+            ["Technical Writing", "/writing/"],
+          ].map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              className="font-space text-sm transition-colors duration-300 hover:text-cyan-300"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+
         <div className="text-center">
           <p
             className="flex flex-wrap items-center justify-center gap-2 font-jetbrains text-sm"
