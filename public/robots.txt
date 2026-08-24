@@ -1,4 +1,4 @@
-# https://www.robotstxt.org/robotstxt.html
-# hey
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://adarshraj.in/sitemap.xml
