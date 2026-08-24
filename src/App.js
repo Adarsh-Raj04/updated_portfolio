@@ -22,17 +22,21 @@ import CursorSelector from "./components/CursorSelector";
 import PortfolioCounter from "./components/PortfolioCounter";
 import LandingAnimation from "./components/LandingAnimation";
 import CursorGlow from "./components/CursorGlow";
+import {
+  AboutPage,
+  ProjectsPage,
+  ResearchPage,
+  WritingPage,
+} from "./pages/AuthorityPages";
 import "./components/LandingAnimation.css";
 import "./animations.css";
 
-export default function Home() {
+function Home() {
   const [showContent, setShowContent] = useState(false);
 
   return (
     <>
-      {/* Landing Animation for the portfolio with some enhancements*/}
       <LandingAnimation onComplete={() => setShowContent(true)} />
-
       <main
         className="min-h-screen"
         style={{
@@ -42,23 +46,13 @@ export default function Home() {
           transition: "opacity 0.5s ease-in",
         }}
       >
-        {/* Scroll Progress Bar */}
         <ScrollProgress />
-
-        {/* Animated Gradient Background */}
         <AnimatedBackground />
-
-        {/* Particle Network Effect - Medium parallax */}
         <ParallaxLayer speed={0.3}>
           <ParticleBackground />
         </ParallaxLayer>
-
-        {/* Enhanced Cursor Glow with Trails */}
         <CursorGlow />
-
-        {/* Easter Eggs */}
         <EasterEggs />
-
         <Navbar />
         <Hero />
         <About />
@@ -70,22 +64,29 @@ export default function Home() {
         <Certifications />
         <Contact />
         <Footer />
-
-        {/* Back to Top Button */}
         <BackToTop />
-
-        {/* Sound Effects Toggle */}
         <SoundEffects />
-
-        {/* Cursor Selector */}
         <CursorSelector />
-
-        {/* Terminal */}
         <Terminal />
-
-        {/* Portfolio Counter */}
         <PortfolioCounter />
       </main>
     </>
   );
+}
+
+export default function App() {
+  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+
+  switch (path) {
+    case "/about":
+      return <AboutPage />;
+    case "/projects":
+      return <ProjectsPage />;
+    case "/research":
+      return <ResearchPage />;
+    case "/writing":
+      return <WritingPage />;
+    default:
+      return <Home />;
+  }
 }
