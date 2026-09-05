@@ -416,9 +416,9 @@ export const educationData = {
   title: "EDUCATION",
   subtitle: "Academic foundation for applied engineering",
   degree: "Bachelor of Technology in Computer Science",
-  institution: "Lovely Professional University",
+  institution: "M S Ramaiah University of Applied Sciences",
   duration: "2020 - 2024",
-  location: "Punjab, India",
+  location: "Bengaluru, India",
   summary:
     "Focused on software engineering, data systems, and applied machine learning with strong project-first execution.",
   highlights: [
